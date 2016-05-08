@@ -15,9 +15,9 @@ DYLIB_NAME_POSTFIX = .js
 # 追加するフラグ。
 # CXXFLAGSは必要無ければ空でも良いが、LDFLAGSはdlopen可能なライブラリを
 # 作れる設定にしなければならない。darwinなら-bundle、LinuxやBSDなら-shared。
-CXXFLAGS = -O3 -Wall -std=c++11 -s ALLOW_MEMORY_GROWTH=1
+CXXFLAGS = -O3 -Wall -std=c++11
 EXPORTED_FUNCTIONS = "['_load','_unload','_request']"
-LDFLAGS = -O3 -shared --memory-init-file 0 --pre-js em-pre.js --post-js em-post.js -s EXPORTED_FUNCTIONS=$(EXPORTED_FUNCTIONS) -s ALLOW_MEMORY_GROWTH=1
+LDFLAGS = -O3 --llvm-lto 2 --closure 1 --memory-init-file 0 --pre-js em-pre.js --post-js em-post.js -s EXPORTED_FUNCTIONS=$(EXPORTED_FUNCTIONS)
 
 
 ################## これより下は弄らなくてもコンパイル出来ます ##################
@@ -77,7 +77,7 @@ clean:
 
 $(LIBSATORI): $(LIBSATORI_OBJ)
 	$(LD) -o $@ $(LIBSATORI_OBJ) $(LDFLAGS)
-	$(STRIP) -x $@
+#	$(STRIP) -x $@
 
 #$(LIBSSU): $(LIBSSU_OBJ)
 #	$(LD) -o $@ $(LIBSSU_OBJ) $(LDFLAGS)
