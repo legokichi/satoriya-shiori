@@ -21,9 +21,12 @@ InstalledDir: /home/legokichi/emsdk_portable/clang/fastcomp/build_incoming_32/bi
 ```
 $ ./firefox --version
 Mozilla Firefox 49.0a1
-
 ```
 
+```
+-rw-rw-r-- 1 legokichi legokichi 1149088  5月  8 21:54 libsatori.default.js
+-rw-rw-r-- 1 legokichi legokichi 2202632  5月  8 22:11 libsatori.lto.js
+```
 
 ## default
 
@@ -37,7 +40,7 @@ LDFLAGS = -O3 -shared --memory-init-file 0 --pre-js em-pre.js --post-js em-post.
 ## LTO
 
 ```
-CXXFLAGS = -O3 -Wall -std=c++11^M
+CXXFLAGS = -O3 -Wall -std=c++11
 LDFLAGS = -O3 --llvm-lto 2 --closure 1 --memory-init-file 0 --pre-js em-pre.js --post-js em-post.js -s EXPORTED_FUNCTIONS=$(EXPORTED_FUNCTIONS)
 ```
 
